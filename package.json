@@ -1,0 +1,27 @@
+{
+  "name": "bedrock-web-profile",
+  "version": "0.0.1-0",
+  "description": "Profiles for Bedrock Web Apps",
+  "main": "index.js",
+  "module": "main.js",
+  "scripts": {},
+  "author": {
+    "name": "Digital Bazaar, Inc.",
+    "email": "support@digitalbazaar.com",
+    "url": "https://digitalbazaar.com"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "esm": "^3.2.25"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitalbazaar/bedrock-web-profile"
+  },
+  "devDependencies": {
+    "eslint": "^6.0.0",
+    "eslint-config-digitalbazaar": "^2.0.0",
+    "eslint-plugin-jsdoc": "^4.6.0",
+    "jsdoc": "^3.5.5"
+  }
+}
