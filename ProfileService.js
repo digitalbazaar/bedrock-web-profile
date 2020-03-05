@@ -103,7 +103,7 @@ export class ProfileService {
    */
   async getAllAgents({url = this.config.urls.profileAgents, account} = {}) {
     try {
-      const endpoint = `${url}?account=${account}`;
+      const endpoint = `${url}?account=${encodeURIComponent(account)}`;
       const response = await this._axios.get(endpoint);
       return response.data;
     } catch(e) {
@@ -122,7 +122,8 @@ export class ProfileService {
    */
   async getAgent({url = this.config.urls.profileAgents, id, account} = {}) {
     try {
-      const endpoint = `${url}/${id}?account=${account}`;
+      const endpoint = `${url}/${encodeURIComponent(id)}` +
+        `?account=${encodeURIComponent(account)}`;
       const response = await this._axios.get(endpoint);
       return response.data;
     } catch(e) {
@@ -140,7 +141,8 @@ export class ProfileService {
    */
   async deleteAgent({url = this.config.urls.profileAgents, id, account} = {}) {
     try {
-      const endpoint = `${url}/${id}?account=${account}`;
+      const endpoint = `${url}/${encodeURIComponent(id)}` +
+        `?account=${encodeURIComponent(account)}`;
       const response = await this._axios.delete(endpoint);
       return response.status === 204;
     } catch(e) {
@@ -162,7 +164,8 @@ export class ProfileService {
   async getAgentByProfile(
     {url = this.config.urls.profileAgents, account, profile} = {}) {
     try {
-      const endpoint = `${url}?profile=${profile}&account=${account}`;
+      const endpoint = `${url}?profile=${encodeURIComponent(profile)}` +
+        `&account=${encodeURIComponent(account)}`;
       const response = await this._axios.get(endpoint);
       if(response.data.length == 0) {
         throw new Error('"profileAgent" not found.');
@@ -183,9 +186,10 @@ export class ProfileService {
   async delegateAgentCapabilities(
     {url = this.config.urls.profileAgents, profileAgentId, account, id} = {}) {
     try {
-      const endpoint = `${url}/${profileAgentId}/capabilities/delegate` +
-        `?id=${id}` +
-        `&account=${account}`;
+      const endpoint =
+        `${url}/${encodeURIComponent(profileAgentId)}/capabilities/delegate` +
+        `?id=${encodeURIComponent(id)}` +
+        `&account=${encodeURIComponent(account)}`;
       const response = await this._axios.get(endpoint);
       return response.data;
     } catch(e) {
@@ -203,8 +207,8 @@ export class ProfileService {
   async getAgentCapabilitySet(
     {url = this.config.urls.profileAgents, profileAgentId, account} = {}) {
     try {
-      const endpoint = `${url}/${profileAgentId}/capability-set` +
-        `?account=${account}`;
+      const endpoint = `${url}/${encodeURIComponent(profileAgentId)}` +
+        `/capability-set?account=${encodeURIComponent(account)}`;
       const response = await this._axios.get(endpoint);
       return response.data;
     } catch(e) {
@@ -223,8 +227,8 @@ export class ProfileService {
     {url = this.config.urls.profileAgents, profileAgentId, account,
       zcaps} = {}) {
     try {
-      const endpoint = `${url}/${profileAgentId}/capability-set` +
-        `?account=${account}`;
+      const endpoint = `${url}/${encodeURIComponent(profileAgentId)}` +
+        `/capability-set?account=${encodeURIComponent(account)}`;
       const response = await this._axios.post(endpoint, {zcaps});
       return response.status === 204;
     } catch(e) {
@@ -242,8 +246,8 @@ export class ProfileService {
   async deleteAgentCapabilitySet(
     {url = this.config.urls.profileAgents, profileAgentId, account} = {}) {
     try {
-      const endpoint = `${url}/${profileAgentId}/capability-set` +
-        `?account=${account}`;
+      const endpoint = `${url}/${encodeURIComponent(profileAgentId)}` +
+        `/capability-set?account=${encodeURIComponent(account)}`;
       const response = await this._axios.delete(endpoint);
       return response.status === 204;
     } catch(e) {
