@@ -57,6 +57,22 @@ export class ProfileService {
    *
    * @returns {Promise} Resolves when the operation completes.
    */
+  async createAgent(
+    {url = this.config.urls.profileAgents, account, profile} = {}) {
+    try {
+      const response = await this._axios.post(url, {account, profile});
+      return response.data;
+    } catch(e) {
+      _rethrowAxiosError(e);
+    }
+  }
+  /**
+   *
+   * @param {Object} options - The options to use.
+   * @param {string} [options.url = '/profiles-agents'] - The service url to use.
+   *
+   * @returns {Promise} Resolves when the operation completes.
+   */
   async getAllAgents({url = this.config.urls.profileAgents, account} = {}) {
     try {
       const endpoint = `${url}?account=${account}`
@@ -66,7 +82,6 @@ export class ProfileService {
       _rethrowAxiosError(e);
     }
   }
-
   /**
    *
    * @param {Object} options - The options to use.
