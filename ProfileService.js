@@ -129,8 +129,27 @@ export class ProfileService {
       _rethrowAxiosError(e);
     }
   }
-
   /**
+   *
+   * @param {Object} options - The options to use.
+   * @param {string} [options.url = '/profiles-agents'] - The service url to use.
+   * @param {string} [options.id] - The id for the profile.
+   *
+   * @returns {Promise} Resolves when the operation completes.
+   */
+  async deleteAgent({url = this.config.urls.profileAgents, id, account} = {}) {
+    try {
+      const endpoint = `${url}/${id}?account=${account}`
+      const response = await this._axios.delete(endpoint);
+      return response.status === 204;
+    } catch(e) {
+      if(e.response.status === 404)  {
+        return true;
+      }
+      _rethrowAxiosError(e);
+    }
+  }
+    /**
    *
    * @param {Object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
@@ -207,6 +226,27 @@ export class ProfileService {
       const response = await this._axios.post(endpoint, {zcaps});
       return response.status === 204;
     } catch(e) {
+      _rethrowAxiosError(e);
+    }
+  }
+  /**
+   *
+   * @param {Object} options - The options to use.
+   * @param {string} [options.url = '/profiles-agents'] - The service url to use.
+   *
+   * @returns {Promise} Resolves when the operation completes.
+   */
+  async deleteAgentCapabilitySet(
+    {url = this.config.urls.profileAgents, profileAgentId, account} = {}) {
+    try {
+      const endpoint = `${url}/${profileAgentId}/capability-set` +
+        `?account=${account}`;
+      const response = await this._axios.delete(endpoint);
+      return response.status === 204;
+    } catch(e) {
+      if(e.response.status === 404)  {
+        return true;
+      }
       _rethrowAxiosError(e);
     }
   }
