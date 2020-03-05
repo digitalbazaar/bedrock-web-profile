@@ -69,6 +69,31 @@ export class ProfileService {
   }
 
   /**
+   *  Claim a profile agent by associating an account with the agent.
+   *
+   * @param {Object} options - The options to use.
+   * @param {string} [options.url = '/profiles-agents'] - The service url to
+   *   use.
+   * @param {string} options.account - The account ID to associate with the
+   *   profile agent.
+   * @param {string} options.profileAgent - The profile agent ID to associate
+   *   with the account.
+   *
+   * @returns {Promise} Resolves when the operation completes.
+   */
+  async claimProfileAgent({
+    url = this.config.urls.profileAgents, account, profileAgent
+  } = {}) {
+    try {
+      // this HTTP API returns 204 with no body on success
+      await this._axios.post(
+        `${url}/${encodeURIComponent(profileAgent)}/claim`, {account});
+    } catch(e) {
+      _rethrowAxiosError(e);
+    }
+  }
+
+  /**
    *
    * @param {Object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
