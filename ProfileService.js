@@ -81,7 +81,7 @@ export class ProfileService {
    *
    * @returns {Promise} Resolves when the operation completes.
    */
-  async claimProfileAgent({
+  async claimAgent({
     url = this.config.urls.profileAgents, account, profileAgent
   } = {}) {
     try {
