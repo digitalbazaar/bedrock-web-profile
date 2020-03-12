@@ -130,6 +130,7 @@ export class ProfileService {
       _rethrowAxiosError(e);
     }
   }
+
   /**
    *
    * @param {Object} options - The options to use.
@@ -175,6 +176,7 @@ export class ProfileService {
       _rethrowAxiosError(e);
     }
   }
+
   /**
    *
    * @param {Object} options - The options to use.
@@ -216,6 +218,7 @@ export class ProfileService {
       _rethrowAxiosError(e);
     }
   }
+
   /**
    *
    * @param {Object} options - The options to use.
