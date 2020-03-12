@@ -195,25 +195,7 @@ export class ProfileService {
       _rethrowAxiosError(e);
     }
   }
-  /**
-   *
-   * @param {Object} options - The options to use.
-   * @param {string} [options.url = '/profiles-agents'] - The service url to
-   *   use.
-   *
-   * @returns {Promise} Resolves when the operation completes.
-   */
-  async getAgentCapabilitySet(
-    {url = this.config.urls.profileAgents, profileAgentId, account} = {}) {
-    try {
-      const endpoint = `${url}/${encodeURIComponent(profileAgentId)}` +
-        `/capability-set?account=${encodeURIComponent(account)}`;
-      const response = await this._axios.get(endpoint);
-      return response.data;
-    } catch(e) {
-      _rethrowAxiosError(e);
-    }
-  }
+
   /**
    *
    * @param {Object} options - The options to use.
