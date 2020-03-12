@@ -183,14 +183,13 @@ export class ProfileService {
    *
    * @returns {Promise} Resolves when the operation completes.
    */
-  async delegateAgentCapabilities(
-    {url = this.config.urls.profileAgents, profileAgentId, account, id} = {}) {
+  async delegateAgentCapabilities({
+    url = this.config.urls.profileAgents, profileAgentId, account, invoker
+  } = {}) {
     try {
       const endpoint =
-        `${url}/${encodeURIComponent(profileAgentId)}/capabilities/delegate` +
-        `?id=${encodeURIComponent(id)}` +
-        `&account=${encodeURIComponent(account)}`;
-      const response = await this._axios.get(endpoint);
+        `${url}/${encodeURIComponent(profileAgentId)}/capabilities/delegate`;
+      const response = await this._axios.post(endpoint, {account, invoker});
       return response.data;
     } catch(e) {
       _rethrowAxiosError(e);
