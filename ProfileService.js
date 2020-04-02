@@ -59,9 +59,9 @@ export class ProfileService {
    * @returns {Promise} Resolves when the operation completes.
    */
   async createAgent(
-    {url = this.config.urls.profileAgents, account, profile} = {}) {
+    {url = this.config.urls.profileAgents, account, profile, token} = {}) {
     try {
-      const response = await this._axios.post(url, {account, profile});
+      const response = await this._axios.post(url, {account, profile, token});
       return response.data;
     } catch(e) {
       _rethrowAxiosError(e);
