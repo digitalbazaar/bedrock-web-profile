@@ -1,5 +1,10 @@
 # bedrock-web-profile ChangeLog
 
+## 2.1.0 - 2020-04-02
+
+### Added
+- Add support for application tokens.
+
 ## 2.0.0 - 2020-03-12
 
 ### Changed
