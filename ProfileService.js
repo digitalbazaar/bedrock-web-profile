@@ -55,6 +55,9 @@ export class ProfileService {
    * @param {Object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
    *   use.
+   * @param {string} [options.account] - An account ID.
+   * @param {string} [options.profile] - A profile ID.
+   * @param {string} [options.token] - An application token.
    *
    * @returns {Promise} Resolves when the operation completes.
    */
