@@ -2,9 +2,10 @@
   "name": "bedrock-web-profile",
   "version": "2.2.1-0",
   "description": "Profiles for Bedrock Web Apps",
-  "main": "index.js",
   "module": "main.js",
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint ."
+  },
   "author": {
     "name": "Digital Bazaar, Inc.",
     "email": "support@digitalbazaar.com",
