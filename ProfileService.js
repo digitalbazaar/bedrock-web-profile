@@ -38,12 +38,17 @@ export class ProfileService {
    * @param {string} [options.url = '/profiles'] - The service url to use.
    * @param {string} [options.account] - The account to associate with the
    *                                     profile agent.
+   * @param {object} [didMethod] - Supported: 'key' and 'v1'.
+   * @param {string} [didOptions] - Hashmap of optional DID method options.
    *
-   * @returns {Promise} Resolves when the operation completes.
+   * @returns {Promise<object>} Resolves when the operation completes.
    */
-  async create({url = this.config.urls.base, account} = {}) {
+  async create({
+    url = this.config.urls.base, account, didMethod, didOptions} = {}) {
     try {
-      const response = await this._axios.post(url, {account});
+      const response = await this._axios.post(
+        url, {account, didMethod, didOptions}
+      );
       return response.data;
     } catch(e) {
       _rethrowAxiosError(e);
