@@ -1,5 +1,10 @@
 # bedrock-web-profile ChangeLog
 
+## 2.2.0 - 2020-04-20
+
+### Added
+- Add support for Veres One type DIDs in profile creation.
+
 ## 2.1.0 - 2020-04-02
 
 ### Added
