@@ -6,12 +6,12 @@
 import axios from 'axios';
 
 /**
- * @param {Object} [config = {urls: {base: '/profiles'}}]
+ * @param {object} [config = {urls: {base: '/profiles'}}]
  * @param {string} [config.baseURL] - The protocol, host and port for use with
  *   node.js (e.g. https://example.com)
  * @param {object} [config.httpsAgent] - An optional
  *   node.js `https.Agent` instance to use when making requests.
- * @param {Object} [config.urls = {}]
+ * @param {object} [config.urls = {}]
  * @param {string} [config.urls.base = 'FIXME']
  */
 export class ProfileService {
@@ -34,16 +34,21 @@ export class ProfileService {
 
   /**
    *
-   * @param {Object} options - The options to use.
+   * @param {object} options - The options to use.
    * @param {string} [options.url = '/profiles'] - The service url to use.
    * @param {string} [options.account] - The account to associate with the
    *                                     profile agent.
+   * @param {object} [didMethod] - Supported: 'key' and 'v1'.
+   * @param {string} [didOptions] - Hashmap of optional DID method options.
    *
-   * @returns {Promise} Resolves when the operation completes.
+   * @returns {Promise<object>} Resolves when the operation completes.
    */
-  async create({url = this.config.urls.base, account} = {}) {
+  async create({
+    url = this.config.urls.base, account, didMethod, didOptions} = {}) {
     try {
-      const response = await this._axios.post(url, {account});
+      const response = await this._axios.post(
+        url, {account, didMethod, didOptions}
+      );
       return response.data;
     } catch(e) {
       _rethrowAxiosError(e);
@@ -52,7 +57,7 @@ export class ProfileService {
 
   /**
    *
-   * @param {Object} options - The options to use.
+   * @param {object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
    *   use.
    * @param {string} [options.account] - An account ID.
@@ -72,9 +77,9 @@ export class ProfileService {
   }
 
   /**
-   *  Claim a profile agent by associating an account with the agent.
+   *  Claims a profile agent by associating an account with the agent.
    *
-   * @param {Object} options - The options to use.
+   * @param {object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
    *   use.
    * @param {string} options.account - The account ID to associate with the
@@ -98,7 +103,7 @@ export class ProfileService {
 
   /**
    *
-   * @param {Object} options - The options to use.
+   * @param {object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
    *   use.
    *
@@ -116,7 +121,7 @@ export class ProfileService {
 
   /**
    *
-   * @param {Object} options - The options to use.
+   * @param {object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
    *   use.
    * @param {string} [options.id] - The id for the profile.
@@ -136,7 +141,7 @@ export class ProfileService {
 
   /**
    *
-   * @param {Object} options - The options to use.
+   * @param {object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
    *   use.
    * @param {string} [options.id] - The id for the profile.
@@ -159,7 +164,7 @@ export class ProfileService {
 
   /**
    *
-   * @param {Object} options - The options to use.
+   * @param {object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
    *   use.
    *
@@ -171,7 +176,7 @@ export class ProfileService {
       const endpoint = `${url}?profile=${encodeURIComponent(profile)}` +
         `&account=${encodeURIComponent(account)}`;
       const response = await this._axios.get(endpoint);
-      if(response.data.length == 0) {
+      if(response.data.length === 0) {
         throw new Error('"profileAgent" not found.');
       }
       return response.data[0];
@@ -182,7 +187,7 @@ export class ProfileService {
 
   /**
    *
-   * @param {Object} options - The options to use.
+   * @param {object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
    *   use.
    *
@@ -203,7 +208,7 @@ export class ProfileService {
 
   /**
    *
-   * @param {Object} options - The options to use.
+   * @param {object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
    *   use.
    *
@@ -224,7 +229,7 @@ export class ProfileService {
 
   /**
    *
-   * @param {Object} options - The options to use.
+   * @param {object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
    *   use.
    *
