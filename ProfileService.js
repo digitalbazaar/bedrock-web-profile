@@ -35,8 +35,8 @@ export class ProfileService {
   /**
    * @param {object} options - The options to use.
    * @param {string} [options.url='/profiles'] - The service url to use.
-   * @param {string} [options.account] - An account id.
-   * @param {object} [options.didMethod] - Supported: 'key' and 'v1'.
+   * @param {string} options.account - An account id.
+   * @param {object} options.didMethod - Supported: 'key' and 'v1'.
    * @param {string} [options.didOptions] - Hashmap of optional DID method
    *   options.
    *
