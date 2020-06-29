@@ -7,7 +7,7 @@ import axios from 'axios';
 
 /**
  * @param {object} [config = {urls: {base: '/profiles'}}] - The config options.
- * @param {string} [config.baseURL] - Protocol, host & port used with node.JS
+ * @param {string} [config.baseURL] - Protocol, host & port used with Node.js
  *   such as https://example.com.
  * @param {object} [config.httpsAgent] - An optional
  *   node.js `https.Agent` instance to use when making requests.
