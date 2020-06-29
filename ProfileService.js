@@ -163,7 +163,7 @@ export class ProfileService {
    * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
    * @param {string} options.account - An account id.
-   * @param {string }options.profile - A profile id.
+   * @param {string} options.profile - A profile id.
    * @returns {Promise} Resolves when the operation completes.
    */
   async getAgentByProfile(
