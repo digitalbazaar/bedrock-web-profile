@@ -35,7 +35,7 @@ export class ProfileService {
   /**
    * @param {object} options - The options to use.
    * @param {string} [options.url='/profiles'] - The service url to use.
-   * @param {string} options.account - An account id.
+   * @param {string} options.account - An Account ID.
    * @param {object} options.didMethod - Supported: 'key' and 'v1'.
    * @param {string} [options.didOptions] - Hashmap of optional DID method
    *   options.
@@ -59,7 +59,7 @@ export class ProfileService {
    * @param {object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
    *   use.
-   * @param {string} [options.account] - An account id.
+   * @param {string} [options.account] - An Account ID.
    * @param {string} [options.profile] - A profile ID.
    * @param {string} [options.token] - An application token.
    *
@@ -81,7 +81,7 @@ export class ProfileService {
    * @param {object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
    *   use.
-   * @param {string} [options.account] - An account id.
+   * @param {string} [options.account] - An Account ID.
    * @param {string} options.profileAgent - The profile agent ID to associate
    *   with the account.
    *
@@ -103,7 +103,7 @@ export class ProfileService {
    * @param {object} options - The options to use.
    * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
-   * @param {string} [options.account] - An account id.
+   * @param {string} [options.account] - An Account ID.
    *
    * @returns {Promise} Resolves when the operation completes.
    */
@@ -122,7 +122,7 @@ export class ProfileService {
    * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
    * @param {string} [options.id] - The id for the profile.
-   * @param {string} [options.account] - An account id.
+   * @param {string} [options.account] - An Account ID.
    * @returns {Promise} Resolves when the operation completes.
    */
   async getAgent({url = this.config.urls.profileAgents, id, account} = {}) {
@@ -141,7 +141,7 @@ export class ProfileService {
    * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
    * @param {string} [options.id] - The id for the profile.
-   * @param {string} [options.account] - An account id.
+   * @param {string} [options.account] - An Account ID.
    * @returns {Promise} Resolves when the operation completes.
    */
   async deleteAgent({url = this.config.urls.profileAgents, id, account} = {}) {
@@ -162,7 +162,7 @@ export class ProfileService {
    * @param {object} options - The options to use.
    * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
-   * @param {string} options.account - An account id.
+   * @param {string} options.account - An Account ID.
    * @param {string} options.profile - A profile id.
    * @returns {Promise} Resolves when the operation completes.
    */
@@ -186,7 +186,7 @@ export class ProfileService {
    * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
    * @param {string} options.profileAgentId - A Profile Agent id.
-   * @param {string} options.account - An account id.
+   * @param {string} options.account - An Account ID.
    * @param {string} options.invoker - The invoker to delegate capabilities to.
    * @returns {Promise} Resolves when the operation completes.
    */
@@ -208,7 +208,7 @@ export class ProfileService {
    * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
    * @param {string} options.profileAgentId - A Profile Agent id.
-   * @param {string} options.account - An account id.
+   * @param {string} options.account - An Account ID.
    * @param {object} options.zcaps - An object in which each property
    *   contains a valid zcap.
    * @returns {Promise} Resolves when the operation completes.
@@ -231,7 +231,7 @@ export class ProfileService {
    * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
    * @param {string} options.profileAgentId - A Profile Agent id.
-   * @param {string} options.account - An account id.
+   * @param {string} options.account - An Account ID.
    * @returns {Promise} Resolves when the operation completes.
    */
   async deleteAgentCapabilitySet(
