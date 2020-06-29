@@ -6,9 +6,9 @@
 import axios from 'axios';
 
 /**
- * @param {object} [config = {urls: {base: '/profiles'}}]
- * @param {string} [config.baseURL] - The protocol, host and port for use with
- *   node.js (e.g. https://example.com)
+ * @param {object} [config = {urls: {base: '/profiles'}}] - The config options.
+ * @param {string} [config.baseURL] - Protocol, host & port used with node.JS
+ *   such as https://example.com.
  * @param {object} [config.httpsAgent] - An optional
  *   node.js `https.Agent` instance to use when making requests.
  * @param {object} [config.urls = {}]
@@ -33,13 +33,12 @@ export class ProfileService {
   }
 
   /**
-   *
    * @param {object} options - The options to use.
-   * @param {string} [options.url = '/profiles'] - The service url to use.
-   * @param {string} [options.account] - The account to associate with the
-   *                                     profile agent.
-   * @param {object} [didMethod] - Supported: 'key' and 'v1'.
-   * @param {string} [didOptions] - Hashmap of optional DID method options.
+   * @param {string} [options.url='/profiles'] - The service url to use.
+   * @param {string} [options.account] - An account id.
+   * @param {object} [options.didMethod] - Supported: 'key' and 'v1'.
+   * @param {string} [options.didOptions] - Hashmap of optional DID method
+   *   options.
    *
    * @returns {Promise<object>} Resolves when the operation completes.
    */
@@ -60,7 +59,7 @@ export class ProfileService {
    * @param {object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
    *   use.
-   * @param {string} [options.account] - An account ID.
+   * @param {string} [options.account] - An account id.
    * @param {string} [options.profile] - A profile ID.
    * @param {string} [options.token] - An application token.
    *
@@ -82,8 +81,7 @@ export class ProfileService {
    * @param {object} options - The options to use.
    * @param {string} [options.url = '/profiles-agents'] - The service url to
    *   use.
-   * @param {string} options.account - The account ID to associate with the
-   *   profile agent.
+   * @param {string} [options.account] - An account id.
    * @param {string} options.profileAgent - The profile agent ID to associate
    *   with the account.
    *
@@ -102,10 +100,10 @@ export class ProfileService {
   }
 
   /**
-   *
    * @param {object} options - The options to use.
-   * @param {string} [options.url = '/profiles-agents'] - The service url to
+   * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
+   * @param {string} [options.account] - An account id.
    *
    * @returns {Promise} Resolves when the operation completes.
    */
@@ -120,12 +118,11 @@ export class ProfileService {
   }
 
   /**
-   *
    * @param {object} options - The options to use.
-   * @param {string} [options.url = '/profiles-agents'] - The service url to
+   * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
    * @param {string} [options.id] - The id for the profile.
-   *
+   * @param {string} [options.account] - An account id.
    * @returns {Promise} Resolves when the operation completes.
    */
   async getAgent({url = this.config.urls.profileAgents, id, account} = {}) {
@@ -140,12 +137,11 @@ export class ProfileService {
   }
 
   /**
-   *
    * @param {object} options - The options to use.
-   * @param {string} [options.url = '/profiles-agents'] - The service url to
+   * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
    * @param {string} [options.id] - The id for the profile.
-   *
+   * @param {string} [options.account] - An account id.
    * @returns {Promise} Resolves when the operation completes.
    */
   async deleteAgent({url = this.config.urls.profileAgents, id, account} = {}) {
@@ -163,11 +159,11 @@ export class ProfileService {
   }
 
   /**
-   *
    * @param {object} options - The options to use.
-   * @param {string} [options.url = '/profiles-agents'] - The service url to
+   * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
-   *
+   * @param {string} options.account - An account id.
+   * @param {string }options.profile - A profile id.
    * @returns {Promise} Resolves when the operation completes.
    */
   async getAgentByProfile(
@@ -186,11 +182,12 @@ export class ProfileService {
   }
 
   /**
-   *
    * @param {object} options - The options to use.
-   * @param {string} [options.url = '/profiles-agents'] - The service url to
+   * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
-   *
+   * @param {string} options.profileAgentId - A Profile Agent id.
+   * @param {string} options.account - An account id.
+   * @param {string} options.invoker - The invoker to delegate capabilities to.
    * @returns {Promise} Resolves when the operation completes.
    */
   async delegateAgentCapabilities({
@@ -207,11 +204,13 @@ export class ProfileService {
   }
 
   /**
-   *
    * @param {object} options - The options to use.
-   * @param {string} [options.url = '/profiles-agents'] - The service url to
+   * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
-   *
+   * @param {string} options.profileAgentId - A Profile Agent id.
+   * @param {string} options.account - An account id.
+   * @param {object} options.zcaps - An object in which each property
+   *   contains a valid zcap.
    * @returns {Promise} Resolves when the operation completes.
    */
   async updateAgentCapabilitySet(
@@ -228,11 +227,11 @@ export class ProfileService {
   }
 
   /**
-   *
    * @param {object} options - The options to use.
-   * @param {string} [options.url = '/profiles-agents'] - The service url to
+   * @param {string} [options.url='/profiles-agents'] - The service url to
    *   use.
-   *
+   * @param {string} options.profileAgentId - A Profile Agent id.
+   * @param {string} options.account - An account id.
    * @returns {Promise} Resolves when the operation completes.
    */
   async deleteAgentCapabilitySet(
