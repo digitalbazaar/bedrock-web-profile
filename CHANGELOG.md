@@ -1,5 +1,11 @@
 # bedrock-web-profile ChangeLog
 
+## 2.3.0 - 2020-06-29
+
+### Changed
+- Improve jsdocs.
+- Update test deps and CI workflow.
+
 ## 2.2.0 - 2020-04-20
 
 ### Added
