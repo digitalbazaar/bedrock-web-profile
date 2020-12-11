@@ -1,6 +1,6 @@
 # bedrock-web-profile ChangeLog
 
-## 2.4.1 - 2020-10-TBD
+## 2.4.1 - 2020-12-11
 
 ### Changed
 - Remove encodeURIComponent() for query params.
