@@ -1,35 +1,26 @@
 /*!
  * Copyright (c) 2020 Digital Bazaar, Inc. All rights reserved.
  */
-'use strict';
 
-import axios from 'axios';
+import {httpClient} from '@digitalbazaar/http-client';
 
 /**
  * @param {object} [config = {urls: {base: '/profiles'}}] - The config options.
  * @param {string} [config.baseURL] - Protocol, host & port used with Node.js
  *   such as https://example.com.
- * @param {object} [config.httpsAgent] - An optional
- *   node.js `https.Agent` instance to use when making requests.
  * @param {object} [config.urls = {}]
  * @param {string} [config.urls.base = 'FIXME']
  */
 export class ProfileService {
   constructor({
     baseURL,
-    httpsAgent,
     urls = {
       base: '/profiles',
       profileAgents: '/profile-agents'
     }
   } = {}) {
     this.config = {urls};
-    const headers = {Accept: 'application/ld+json, application/json'};
-    this._axios = axios.create({
-      baseURL,
-      headers,
-      httpsAgent,
-    });
+    this.baseURL = baseURL;
   }
 
   /**
@@ -45,12 +36,17 @@ export class ProfileService {
   async create({
     url = this.config.urls.base, account, didMethod, didOptions} = {}) {
     try {
-      const response = await this._axios.post(
-        url, {account, didMethod, didOptions}
-      );
+      if(url.startsWith('/')) {
+        url = url.substring(1);
+      }
+      const response = await httpClient.post(
+        url, {
+          prefixUrl: this.baseURL,
+          json: {account, didMethod, didOptions}
+        });
       return response.data;
     } catch(e) {
-      _rethrowAxiosError(e);
+      _rethrowHttpError(e);
     }
   }
 
@@ -68,10 +64,17 @@ export class ProfileService {
   async createAgent(
     {url = this.config.urls.profileAgents, account, profile, token} = {}) {
     try {
-      const response = await this._axios.post(url, {account, profile, token});
+      if(url.startsWith('/')) {
+        url = url.substring(1);
+      }
+      const response = await httpClient.post(
+        url, {
+          prefixUrl: this.baseURL,
+          json: {account, profile, token}
+        });
       return response.data;
     } catch(e) {
-      _rethrowAxiosError(e);
+      _rethrowHttpError(e);
     }
   }
 
@@ -90,12 +93,18 @@ export class ProfileService {
   async claimAgent({
     url = this.config.urls.profileAgents, account, profileAgent
   } = {}) {
+    if(url.startsWith('/')) {
+      url = url.substring(1);
+    }
     try {
       // this HTTP API returns 204 with no body on success
-      await this._axios.post(
-        `${url}/${encodeURIComponent(profileAgent)}/claim`, {account});
+      await httpClient.post(
+        `${url}/${encodeURIComponent(profileAgent)}/claim`, {
+          prefixUrl: this.baseURL,
+          json: {account}
+        });
     } catch(e) {
-      _rethrowAxiosError(e);
+      _rethrowHttpError(e);
     }
   }
 
@@ -109,10 +118,17 @@ export class ProfileService {
    */
   async getAllAgents({url = this.config.urls.profileAgents, account} = {}) {
     try {
-      const response = await this._axios.get(url, {params: {account}});
+      if(url.startsWith('/')) {
+        url = url.substring(1);
+      }
+      const response = await httpClient.get(
+        url, {
+          prefixUrl: this.baseURL,
+          searchParams: {account}
+        });
       return response.data;
     } catch(e) {
-      _rethrowAxiosError(e);
+      _rethrowHttpError(e);
     }
   }
 
@@ -126,11 +142,18 @@ export class ProfileService {
    */
   async getAgent({url = this.config.urls.profileAgents, id, account} = {}) {
     try {
+      if(url.startsWith('/')) {
+        url = url.substring(1);
+      }
       const endpoint = `${url}/${encodeURIComponent(id)}`;
-      const response = await this._axios.get(endpoint, {params: {account}});
+      const response = await httpClient.get(
+        endpoint, {
+          prefixUrl: this.baseURL,
+          searchParams: {account}
+        });
       return response.data;
     } catch(e) {
-      _rethrowAxiosError(e);
+      _rethrowHttpError(e);
     }
   }
 
@@ -144,14 +167,21 @@ export class ProfileService {
    */
   async deleteAgent({url = this.config.urls.profileAgents, id, account} = {}) {
     try {
+      if(url.startsWith('/')) {
+        url = url.substring(1);
+      }
       const endpoint = `${url}/${encodeURIComponent(id)}`;
-      const response = await this._axios.delete(endpoint, {params: {account}});
+      const response = await httpClient.delete(
+        endpoint, {
+          prefixUrl: this.baseURL,
+          searchParams: {account}
+        });
       return response.status === 204;
     } catch(e) {
       if(e.response.status === 404) {
         return true;
       }
-      _rethrowAxiosError(e);
+      _rethrowHttpError(e);
     }
   }
 
@@ -166,13 +196,20 @@ export class ProfileService {
   async getAgentByProfile(
     {url = this.config.urls.profileAgents, account, profile} = {}) {
     try {
-      const response = await this._axios.get(url, {params: {profile, account}});
+      if(url.startsWith('/')) {
+        url = url.substring(1);
+      }
+      const response = await httpClient.get(
+        url, {
+          prefixUrl: this.baseURL,
+          searchParams: {profile, account}
+        });
       if(response.data.length === 0) {
         throw new Error('"profileAgent" not found.');
       }
       return response.data[0];
     } catch(e) {
-      _rethrowAxiosError(e);
+      _rethrowHttpError(e);
     }
   }
 
@@ -189,12 +226,19 @@ export class ProfileService {
     url = this.config.urls.profileAgents, profileAgentId, account, invoker
   } = {}) {
     try {
+      if(url.startsWith('/')) {
+        url = url.substring(1);
+      }
       const endpoint =
         `${url}/${encodeURIComponent(profileAgentId)}/capabilities/delegate`;
-      const response = await this._axios.post(endpoint, {account, invoker});
+      const response = await httpClient.post(
+        endpoint, {
+          prefixUrl: this.baseURL,
+          json: {account, invoker}
+        });
       return response.data;
     } catch(e) {
-      _rethrowAxiosError(e);
+      _rethrowHttpError(e);
     }
   }
 
@@ -212,13 +256,19 @@ export class ProfileService {
     {url = this.config.urls.profileAgents, profileAgentId, account,
       zcaps} = {}) {
     try {
+      if(url.startsWith('/')) {
+        url = url.substring(1);
+      }
       const endpoint = `${url}/${encodeURIComponent(profileAgentId)}` +
         `/capability-set`;
-      const response = await this._axios.post(endpoint, {zcaps},
-        {params: {account}});
+      const response = await httpClient.post(endpoint, {
+        prefixUrl: this.baseURL,
+        json: {zcaps},
+        searchParams: {account}
+      });
       return response.status === 204;
     } catch(e) {
-      _rethrowAxiosError(e);
+      _rethrowHttpError(e);
     }
   }
 
@@ -233,27 +283,34 @@ export class ProfileService {
   async deleteAgentCapabilitySet(
     {url = this.config.urls.profileAgents, profileAgentId, account} = {}) {
     try {
+      if(url.startsWith('/')) {
+        url = url.substring(1);
+      }
       const endpoint = `${url}/${encodeURIComponent(profileAgentId)}` +
         `/capability-set`;
-      const response = await this._axios.delete(endpoint, {params: {account}});
+      const response = await httpClient.delete(
+        endpoint, {
+          prefixUrl: this.baseURL,
+          searchParams: {account}
+        });
       return response.status === 204;
     } catch(e) {
       if(e.response.status === 404) {
         return true;
       }
-      _rethrowAxiosError(e);
+      _rethrowHttpError(e);
     }
   }
 }
 
-function _rethrowAxiosError(error) {
-  if(error.response) {
+function _rethrowHttpError(error) {
+  if(error.data) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
     // FIXME: there may be better wrappers already created
-    if(error.response.data.message && error.response.data.type) {
+    if(error.data.message && error.data.type) {
       throw new Error(
-        `${error.response.data.type}: ${error.response.data.message}`);
+        `${error.data.type}: ${error.data.message}`);
     }
   }
   throw new Error(error.message);
