@@ -1,5 +1,10 @@
 # bedrock-web-profile ChangeLog
 
+## 3.0.0 - 2021-03-TBD
+
+### Changed
+- **BREAKING**: Remove `axios` and use `@digitalbazaar/http-client@1.0.0`.
+
 ## 2.4.1 - 2020-12-11
 
 ### Changed
