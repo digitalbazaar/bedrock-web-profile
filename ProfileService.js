@@ -35,19 +35,15 @@ export class ProfileService {
    */
   async create({
     url = this.config.urls.base, account, didMethod, didOptions} = {}) {
-    try {
-      if(url.startsWith('/')) {
-        url = url.substring(1);
-      }
-      const response = await httpClient.post(
-        url, {
-          prefixUrl: this.baseURL,
-          json: {account, didMethod, didOptions}
-        });
-      return response.data;
-    } catch(e) {
-      _rethrowHttpError(e);
+    if(url.startsWith('/')) {
+      url = url.substring(1);
     }
+    const response = await httpClient.post(
+      url, {
+        prefixUrl: this.baseURL,
+        json: {account, didMethod, didOptions}
+      });
+    return response.data;
   }
 
   /**
@@ -63,19 +59,15 @@ export class ProfileService {
    */
   async createAgent(
     {url = this.config.urls.profileAgents, account, profile, token} = {}) {
-    try {
-      if(url.startsWith('/')) {
-        url = url.substring(1);
-      }
-      const response = await httpClient.post(
-        url, {
-          prefixUrl: this.baseURL,
-          json: {account, profile, token}
-        });
-      return response.data;
-    } catch(e) {
-      _rethrowHttpError(e);
+    if(url.startsWith('/')) {
+      url = url.substring(1);
     }
+    const response = await httpClient.post(
+      url, {
+        prefixUrl: this.baseURL,
+        json: {account, profile, token}
+      });
+    return response.data;
   }
 
   /**
@@ -96,16 +88,12 @@ export class ProfileService {
     if(url.startsWith('/')) {
       url = url.substring(1);
     }
-    try {
-      // this HTTP API returns 204 with no body on success
-      await httpClient.post(
-        `${url}/${encodeURIComponent(profileAgent)}/claim`, {
-          prefixUrl: this.baseURL,
-          json: {account}
-        });
-    } catch(e) {
-      _rethrowHttpError(e);
-    }
+    // this HTTP API returns 204 with no body on success
+    await httpClient.post(
+      `${url}/${encodeURIComponent(profileAgent)}/claim`, {
+        prefixUrl: this.baseURL,
+        json: {account}
+      });
   }
 
   /**
@@ -117,19 +105,15 @@ export class ProfileService {
    * @returns {Promise} Resolves when the operation completes.
    */
   async getAllAgents({url = this.config.urls.profileAgents, account} = {}) {
-    try {
-      if(url.startsWith('/')) {
-        url = url.substring(1);
-      }
-      const response = await httpClient.get(
-        url, {
-          prefixUrl: this.baseURL,
-          searchParams: {account}
-        });
-      return response.data;
-    } catch(e) {
-      _rethrowHttpError(e);
+    if(url.startsWith('/')) {
+      url = url.substring(1);
     }
+    const response = await httpClient.get(
+      url, {
+        prefixUrl: this.baseURL,
+        searchParams: {account}
+      });
+    return response.data;
   }
 
   /**
@@ -141,20 +125,16 @@ export class ProfileService {
    * @returns {Promise} Resolves when the operation completes.
    */
   async getAgent({url = this.config.urls.profileAgents, id, account} = {}) {
-    try {
-      if(url.startsWith('/')) {
-        url = url.substring(1);
-      }
-      const endpoint = `${url}/${encodeURIComponent(id)}`;
-      const response = await httpClient.get(
-        endpoint, {
-          prefixUrl: this.baseURL,
-          searchParams: {account}
-        });
-      return response.data;
-    } catch(e) {
-      _rethrowHttpError(e);
+    if(url.startsWith('/')) {
+      url = url.substring(1);
     }
+    const endpoint = `${url}/${encodeURIComponent(id)}`;
+    const response = await httpClient.get(
+      endpoint, {
+        prefixUrl: this.baseURL,
+        searchParams: {account}
+      });
+    return response.data;
   }
 
   /**
@@ -181,7 +161,6 @@ export class ProfileService {
       if(e.response.status === 404) {
         return true;
       }
-      _rethrowHttpError(e);
     }
   }
 
@@ -195,22 +174,18 @@ export class ProfileService {
    */
   async getAgentByProfile(
     {url = this.config.urls.profileAgents, account, profile} = {}) {
-    try {
-      if(url.startsWith('/')) {
-        url = url.substring(1);
-      }
-      const response = await httpClient.get(
-        url, {
-          prefixUrl: this.baseURL,
-          searchParams: {profile, account}
-        });
-      if(response.data.length === 0) {
-        throw new Error('"profileAgent" not found.');
-      }
-      return response.data[0];
-    } catch(e) {
-      _rethrowHttpError(e);
+    if(url.startsWith('/')) {
+      url = url.substring(1);
     }
+    const response = await httpClient.get(
+      url, {
+        prefixUrl: this.baseURL,
+        searchParams: {profile, account}
+      });
+    if(response.data.length === 0) {
+      throw new Error('"profileAgent" not found.');
+    }
+    return response.data[0];
   }
 
   /**
@@ -225,21 +200,17 @@ export class ProfileService {
   async delegateAgentCapabilities({
     url = this.config.urls.profileAgents, profileAgentId, account, invoker
   } = {}) {
-    try {
-      if(url.startsWith('/')) {
-        url = url.substring(1);
-      }
-      const endpoint =
-        `${url}/${encodeURIComponent(profileAgentId)}/capabilities/delegate`;
-      const response = await httpClient.post(
-        endpoint, {
-          prefixUrl: this.baseURL,
-          json: {account, invoker}
-        });
-      return response.data;
-    } catch(e) {
-      _rethrowHttpError(e);
+    if(url.startsWith('/')) {
+      url = url.substring(1);
     }
+    const endpoint =
+      `${url}/${encodeURIComponent(profileAgentId)}/capabilities/delegate`;
+    const response = await httpClient.post(
+      endpoint, {
+        prefixUrl: this.baseURL,
+        json: {account, invoker}
+      });
+    return response.data;
   }
 
   /**
@@ -255,21 +226,17 @@ export class ProfileService {
   async updateAgentCapabilitySet(
     {url = this.config.urls.profileAgents, profileAgentId, account,
       zcaps} = {}) {
-    try {
-      if(url.startsWith('/')) {
-        url = url.substring(1);
-      }
-      const endpoint = `${url}/${encodeURIComponent(profileAgentId)}` +
-        `/capability-set`;
-      const response = await httpClient.post(endpoint, {
-        prefixUrl: this.baseURL,
-        json: {zcaps},
-        searchParams: {account}
-      });
-      return response.status === 204;
-    } catch(e) {
-      _rethrowHttpError(e);
+    if(url.startsWith('/')) {
+      url = url.substring(1);
     }
+    const endpoint = `${url}/${encodeURIComponent(profileAgentId)}` +
+      `/capability-set`;
+    const response = await httpClient.post(endpoint, {
+      prefixUrl: this.baseURL,
+      json: {zcaps},
+      searchParams: {account}
+    });
+    return response.status === 204;
   }
 
   /**
@@ -298,20 +265,6 @@ export class ProfileService {
       if(e.response.status === 404) {
         return true;
       }
-      _rethrowHttpError(e);
     }
   }
-}
-
-function _rethrowHttpError(error) {
-  if(error.data) {
-    // The request was made and the server responded with a status code
-    // that falls out of the range of 2xx
-    // FIXME: there may be better wrappers already created
-    if(error.data.message && error.data.type) {
-      throw new Error(
-        `${error.data.type}: ${error.data.message}`);
-    }
-  }
-  throw new Error(error.message);
 }
