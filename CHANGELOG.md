@@ -3,7 +3,7 @@
 ## 3.0.0 - 2021-03-TBD
 
 ### Changed
-- **BREAKING**: Remove `axios` and use `@digitalbazaar/http-client@1.0.0`.
+- **BREAKING**: Remove `axios` and use `@digitalbazaar/http-client@1.0.0`. This is breaking because errors thrown by the two libraries are not identical.
 
 ## 2.4.1 - 2020-12-11
 
