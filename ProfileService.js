@@ -35,9 +35,6 @@ export class ProfileService {
    */
   async create({
     url = this.config.urls.base, account, didMethod, didOptions} = {}) {
-    if(url.startsWith('/')) {
-      url = url.substring(1);
-    }
     const response = await httpClient.post(
       url, {
         prefixUrl: this.baseURL,
@@ -59,9 +56,6 @@ export class ProfileService {
    */
   async createAgent(
     {url = this.config.urls.profileAgents, account, profile, token} = {}) {
-    if(url.startsWith('/')) {
-      url = url.substring(1);
-    }
     const response = await httpClient.post(
       url, {
         prefixUrl: this.baseURL,
@@ -85,9 +79,6 @@ export class ProfileService {
   async claimAgent({
     url = this.config.urls.profileAgents, account, profileAgent
   } = {}) {
-    if(url.startsWith('/')) {
-      url = url.substring(1);
-    }
     // this HTTP API returns 204 with no body on success
     await httpClient.post(
       `${url}/${encodeURIComponent(profileAgent)}/claim`, {
@@ -105,9 +96,6 @@ export class ProfileService {
    * @returns {Promise} Resolves when the operation completes.
    */
   async getAllAgents({url = this.config.urls.profileAgents, account} = {}) {
-    if(url.startsWith('/')) {
-      url = url.substring(1);
-    }
     const response = await httpClient.get(
       url, {
         prefixUrl: this.baseURL,
@@ -125,9 +113,6 @@ export class ProfileService {
    * @returns {Promise} Resolves when the operation completes.
    */
   async getAgent({url = this.config.urls.profileAgents, id, account} = {}) {
-    if(url.startsWith('/')) {
-      url = url.substring(1);
-    }
     const endpoint = `${url}/${encodeURIComponent(id)}`;
     const response = await httpClient.get(
       endpoint, {
@@ -147,9 +132,6 @@ export class ProfileService {
    */
   async deleteAgent({url = this.config.urls.profileAgents, id, account} = {}) {
     try {
-      if(url.startsWith('/')) {
-        url = url.substring(1);
-      }
       const endpoint = `${url}/${encodeURIComponent(id)}`;
       const response = await httpClient.delete(
         endpoint, {
@@ -174,9 +156,6 @@ export class ProfileService {
    */
   async getAgentByProfile(
     {url = this.config.urls.profileAgents, account, profile} = {}) {
-    if(url.startsWith('/')) {
-      url = url.substring(1);
-    }
     const response = await httpClient.get(
       url, {
         prefixUrl: this.baseURL,
@@ -200,9 +179,6 @@ export class ProfileService {
   async delegateAgentCapabilities({
     url = this.config.urls.profileAgents, profileAgentId, account, invoker
   } = {}) {
-    if(url.startsWith('/')) {
-      url = url.substring(1);
-    }
     const endpoint =
       `${url}/${encodeURIComponent(profileAgentId)}/capabilities/delegate`;
     const response = await httpClient.post(
@@ -226,9 +202,6 @@ export class ProfileService {
   async updateAgentCapabilitySet(
     {url = this.config.urls.profileAgents, profileAgentId, account,
       zcaps} = {}) {
-    if(url.startsWith('/')) {
-      url = url.substring(1);
-    }
     const endpoint = `${url}/${encodeURIComponent(profileAgentId)}` +
       `/capability-set`;
     const response = await httpClient.post(endpoint, {
@@ -250,9 +223,6 @@ export class ProfileService {
   async deleteAgentCapabilitySet(
     {url = this.config.urls.profileAgents, profileAgentId, account} = {}) {
     try {
-      if(url.startsWith('/')) {
-        url = url.substring(1);
-      }
       const endpoint = `${url}/${encodeURIComponent(profileAgentId)}` +
         `/capability-set`;
       const response = await httpClient.delete(
