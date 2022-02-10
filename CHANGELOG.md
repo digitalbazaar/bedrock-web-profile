@@ -1,5 +1,13 @@
 # bedrock-web-profile ChangeLog
 
+## 4.0.0 - 2022-02-xx
+
+### Changed
+- **BREAKING**: `delegateAgentCapabilities` has been replaced by
+  `delegateAgentCapability`. The new function delegates a specific zcap,
+  which must be passed. The old function delegated a profile agent's zcap
+  invocation key -- which is no longer permitted.
+
 ## 3.0.0 - 2021-05-06
 
 ### Changed
