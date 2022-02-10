@@ -1,6 +1,6 @@
 # bedrock-web-profile ChangeLog
 
-## 4.0.0 - 2022-02-xx
+## 4.0.0 - 2022-02-10
 
 ### Changed
 - **BREAKING**: `delegateAgentCapabilities` has been replaced by
