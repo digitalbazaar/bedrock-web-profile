@@ -1,7 +1,6 @@
 /*!
- * Copyright (c) 2020-2021 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2020-2022 Digital Bazaar, Inc. All rights reserved.
  */
-
 import {httpClient} from '@digitalbazaar/http-client';
 
 /**
@@ -187,11 +186,15 @@ export class ProfileService {
    *   use.
    * @param {string} options.profileAgentId - A Profile Agent id.
    * @param {string} options.account - An Account ID.
-   * @param {string} options.invoker - The invoker to delegate capabilities to.
+   * @param {string} options.controller - The controller to delegate the
+   *   capability to.
+   * @param {object} options.zcap - The capability to delegate.
+   *
    * @returns {Promise} Resolves when the operation completes.
    */
-  async delegateAgentCapabilities({
-    url = this.config.urls.profileAgents, profileAgentId, account, invoker
+  async delegateAgentCapability({
+    url = this.config.urls.profileAgents,
+    profileAgentId, account, controller, zcap
   } = {}) {
     let endpoint =
       `${url}/${encodeURIComponent(profileAgentId)}/capabilities/delegate`;
@@ -200,7 +203,7 @@ export class ProfileService {
     }
     const response = await httpClient.post(
       endpoint, {
-        json: {account, invoker}
+        json: {account, controller, zcap}
       });
     return response.data;
   }
