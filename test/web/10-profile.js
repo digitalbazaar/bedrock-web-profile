@@ -1,11 +1,9 @@
 /*!
- * Copyright (c) 2019-2021 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2019-2022 Digital Bazaar, Inc. All rights reserved.
  */
-
-import {ProfileService} from 'bedrock-web-profile';
+import {ProfileService} from '@bedrock/web-profile';
 
 const profileService = new ProfileService();
-// import mockData from './mock-data.js';
 
 describe('profile API', () => {
   describe('create API', () => {

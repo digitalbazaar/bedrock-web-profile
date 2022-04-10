@@ -1,5 +1,11 @@
 # bedrock-web-profile ChangeLog
 
+## 5.0.0 - 2022-04-xx
+
+### Changed
+- **BREAKING**: Rename package to `@bedrock/web-profile`.
+- **BREAKING**: Convert to module (ESM).
+
 ## 4.0.0 - 2022-02-10
 
 ### Changed
