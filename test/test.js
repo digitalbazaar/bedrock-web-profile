@@ -5,6 +5,7 @@ import * as bedrock from '@bedrock/core';
 import '@bedrock/security-context';
 import '@bedrock/https-agent';
 import '@bedrock/mongodb';
+import {passport} from '@bedrock/passport';
 
 passport.authenticate = (strategyName, options, callback) => {
   // eslint-disable-next-line no-unused-vars
