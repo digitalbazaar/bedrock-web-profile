@@ -1,12 +1,13 @@
 /*!
- * Copyright (c) 2019-2021 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2019-2022 Digital Bazaar, Inc. All rights reserved.
  */
-'use strict';
+import {config} from '@bedrock/core';
+import path from 'path';
+import '@bedrock/https-agent';
+import '@bedrock/karma';
+import '@bedrock/mongodb';
 
-const {config} = require('bedrock');
-const path = require('path');
-
-config.karma.suites['bedrock-web-kms'] = path.join('web', '**', '*.js');
+config.karma.suites['bedrock-web-profile'] = path.join('web', '**', '*.js');
 
 config.karma.config.proxies = {
   '/': 'https://localhost:18443'
@@ -14,7 +15,7 @@ config.karma.config.proxies = {
 config.karma.config.proxyValidateSSL = false;
 
 // mongodb config
-config.mongodb.name = 'bedrock_zcap_storage_test';
+config.mongodb.name = 'bedrock_web_profile_test';
 config.mongodb.host = 'localhost';
 config.mongodb.port = 27017;
 // drop all collections on initialization

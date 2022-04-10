@@ -1,22 +1,33 @@
 /*!
- * Copyright (c) 2019-2021 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2019-2022 Digital Bazaar, Inc. All rights reserved.
  */
-const bedrock = require('bedrock');
-require('bedrock-mongodb');
-require('bedrock-https-agent');
-require('bedrock-security-context');
+import * as bedrock from '@bedrock/core';
+import '@bedrock/security-context';
+import '@bedrock/https-agent';
+import '@bedrock/mongodb';
 
-const brPassport = require('bedrock-passport');
-const mockData = require('./web/mock-data');
-brPassport.optionallyAuthenticated = (req, res, next) => {
-  req.user = {
-    account: {},
-    actor: mockData.actors.alpha
+passport.authenticate = (strategyName, options, callback) => {
+  // eslint-disable-next-line no-unused-vars
+  return async function(req, res, next) {
+    req._sessionManager = passport._sm;
+    req.isAuthenticated = req.isAuthenticated || (() => !!req.user);
+    req.login = (user, callback) => {
+      req._sessionManager.logIn(req, user, function(err) {
+        if(err) {
+          req.user = null;
+          return callback(err);
+        }
+        callback();
+      });
+    };
+    const user = {
+      account: {id: 'urn:uuid:ffaf5d84-7dc2-4f7b-9825-cc8d2e5a5d06'}
+    };
+    callback(null, user);
   };
-  next();
 };
 
-require('bedrock-test');
-require('bedrock-karma');
+import '@bedrock/test';
+import '@bedrock/karma';
 
 bedrock.start();
