@@ -5,6 +5,8 @@ import * as bedrock from '@bedrock/core';
 import '@bedrock/security-context';
 import '@bedrock/https-agent';
 import '@bedrock/mongodb';
+import '@bedrock/profile';
+import '@bedrock/profile-http';
 import {passport} from '@bedrock/passport';
 
 passport.authenticate = (strategyName, options, callback) => {
