@@ -1,5 +1,10 @@
 # bedrock-web-profile ChangeLog
 
+## 6.0.0 - 2022-xx-xx
+
+### Changed
+- **BREAKING**: Use `exports` instead of `module`.
+
 ## 5.0.0 - 2022-04-10
 
 ### Changed
