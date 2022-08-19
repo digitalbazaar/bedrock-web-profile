@@ -1,6 +1,6 @@
 {
   "name": "@bedrock/web-profile",
-  "version": "6.0.0",
+  "version": "6.0.1-0",
   "description": "Profiles for Bedrock Web Apps",
   "type": "module",
   "exports": "./lib/index.js",
