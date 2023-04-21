@@ -1,5 +1,10 @@
 # bedrock-web-profile ChangeLog
 
+## 6.1.0 - 2023-xx-xx
+
+### Changed
+- Added `httpsAgent` as option in `ProfileService`.
+
 ## 6.0.0 - 2022-08-19
 
 ### Changed
