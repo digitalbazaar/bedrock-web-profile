@@ -15,7 +15,7 @@
     "@bedrock/express": "^8.0.0",
     "@bedrock/https-agent": "^4.0.0",
     "@bedrock/jsonld-document-loader": "^4.0.0",
-    "@bedrock/karma": "^6.0.0",
+    "@bedrock/karma": "^6.1.0",
     "@bedrock/mongodb": "^10.0.0",
     "@bedrock/passport": "^11.0.0",
     "@bedrock/profile": "^23.0.1",
@@ -24,7 +24,6 @@
     "@bedrock/server": "^5.0.0",
     "@bedrock/test": "^8.0.3",
     "@bedrock/validation": "^7.0.0",
-    "@bedrock/web-profile": "file:..",
-    "@vue/compiler-sfc": "^3.3.4"
+    "@bedrock/web-profile": "file:.."
   }
 }
