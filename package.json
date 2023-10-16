@@ -16,7 +16,7 @@
     "url": "https://digitalbazaar.com"
   },
   "dependencies": {
-    "@digitalbazaar/http-client": "^3.1.0"
+    "@digitalbazaar/http-client": "^4.0.0"
   },
   "repository": {
     "type": "git",
